@@ -1,34 +1,5 @@
 # Vocal Metronome — Windows VST3 project
 
-A voice metronome using your four updated recordings. METRONOME title, dark charcoal surfaces, soft teal accents, and light text. Audio is embedded in the plugin. The original host-sync audio engine is preserved.
-
-## Status
-
-This archive contains the complete implementation and build automation, NOT a compiled VST3. It was prepared in a Linux environment; a Windows build has not been performed. It has not been compiled, loaded, or audio-tested in FL Studio. The Windows build must complete successfully before it can be used. Do not rename a source file to .vst3.
-
-## Easiest build without installing developer tools: GitHub
-
-1. Create an empty private GitHub repository.
-2. Put the CONTENTS of this Vocal-Metronome folder in its root, including `.github/workflows/windows-vst3.yml`. The CMakeLists.txt file must be at the repository root. Using Git to upload preserves the hidden .github folder.
-3. Open the repository's Actions tab, choose **Build Windows VST3**, and click **Run workflow**. If prompted, enable Actions for the repository.
-4. After a successful run, open the run and download **Vocal-Metronome-Windows-x64-VST3** under Artifacts. Extract the downloaded ZIP.
-5. Install the complete Vocal-Metronome.vst3 folder as below.
-
-This runs compilation on a GitHub Windows machine. No account connection or upload has been performed for you. Your account's Actions availability and usage limits apply. If a build fails, its log identifies the error; no compiled release is included here.
-
-## Local Windows build
-
-Install Visual Studio 2022 with **Desktop development with C++**, including its Windows SDK and C++ CMake tools. Install Git for Windows with command-line support. Extract the entire project first, then double-click **Build-Windows.cmd**. Internet is needed on the first build to download JUCE 8.0.6 and its build dependencies.
-
-The script uses Visual Studio 2022 Community's bundled CMake if `cmake` is not on PATH. For another Visual Studio edition, use its Developer PowerShell and run:
-
-```powershell
-cmake -S . -B build -G "Visual Studio 17 2022" -A x64
-cmake --build build --config Release --target VocalMetronome_VST3 --parallel
-```
-
-Output: `build/VocalMetronome_artefacts/Release/VST3/Vocal-Metronome.vst3`.
-
 ## Install in FL Studio on Windows
 
 1. Close FL Studio.
@@ -51,18 +22,7 @@ If FL Studio suspends it, disable **Smart disable** for the plugin in its wrappe
 - It does not implement FL Studio's pre-roll/count-in system. It is an audible instrument that follows the transport.
 - Embedded recordings have leading silence trimmed using the same threshold and 8 ms margin as the HTML version. Original WAV bytes are included unchanged.
 
-## Validation checklist after building
 
-This is the remaining runtime acceptance test, not a claim of completed testing:
-
-- Scan and open the plugin in FL Studio; check UI layout and all controls.
-- In a 4/4 project, play at 60, 100 and 180 BPM alongside FL Studio's metronome. Check that all four counts align.
-- Change and automate BPM while playing; check for drift.
-- Stop/restart on a beat, start between beats, seek, and loop a four-bar range.
-- Try both small and large audio buffers (64 and 1024 samples).
-- Check each mute, volume, and pitch; save/reopen the FL project and verify settings restore.
-- Close the plugin editor during playback; counts should continue.
-- Test offline export with counting enabled and disabled.
 
 ## Dependencies and attribution
 
